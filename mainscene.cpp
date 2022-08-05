@@ -2,6 +2,7 @@
 #include "ui_mainscene.h"
 #include <QPainter>
 #include <QDebug>
+#include <QSound>
 #include <QTimer>
 #include <mypushbutton.h>
 
@@ -23,22 +24,28 @@ MainScene::MainScene(QWidget *parent)
     startBtn->setParent(this);
     startBtn->move(this->width()*0.5-startBtn->width()*0.5, this->height()*0.7);
 
+    // 开始的音效
+    QSound * startSound = new QSound(":/res/TapButtonSound.wav", this);
+
     chooseScene = new ChooseLevelScene;
 
     // 监听点击返回按钮发送的信号
     connect(chooseScene, &ChooseLevelScene::chooseSceneBack, this, [=](){
         QTimer::singleShot(200, this, [=](){
+            this->setGeometry(chooseScene->geometry());
             chooseScene->hide();
             this->show();
         });
     });
 
     connect(startBtn, &MyPushButton::clicked, this, [=](){
+        startSound->play();
         // 弹起的特效
         startBtn->zoom1();
         startBtn->zoom2();
         QTimer::singleShot(400, this, [=](){
             this->hide();
+            chooseScene->setGeometry(this->geometry());
             chooseScene->show();
         });
     });

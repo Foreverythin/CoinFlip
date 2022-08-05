@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QPainter>
+#include "mycoin.h"
 
 class PlayScene : public QMainWindow
 {
@@ -11,6 +12,12 @@ public:
     PlayScene(int levelNum);
 
     int levelIndex;
+
+    int gameArray[4][4];
+
+    MyCoin * coinBtn[4][4];
+
+    bool isWin;
 
 void paintEvent(QPaintEvent *);
 

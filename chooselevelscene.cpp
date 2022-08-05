@@ -4,6 +4,7 @@
 #include "mypushbutton.h"
 #include "playscene.h"
 #include <QDebug>
+#include <QSound>
 #include <QLabel>
 #include <QTimer>
 
@@ -25,6 +26,12 @@ ChooseLevelScene::ChooseLevelScene(QWidget *parent) : QMainWindow(parent)
         this->close();
     });
 
+    // 点击关卡音效
+    QSound * tapButtonSound = new QSound(":/res/TapButtonSound.wav");
+
+    // 返回音效
+    QSound * backsound = new QSound(":/res/BackButtonSound.wav", this);
+
     // 返回按钮
     MyPushButton *backBtn = new MyPushButton(":/res/BackButton.png", ":/res/BackButtonSelected.png");
     backBtn->setParent(this);
@@ -32,7 +39,7 @@ ChooseLevelScene::ChooseLevelScene(QWidget *parent) : QMainWindow(parent)
 
     // 点击返回
     connect(backBtn, &MyPushButton::clicked, this, [=](){
-        qDebug() << "点击了返回";
+        backsound->play();
         emit this->chooseSceneBack();
     });
 
@@ -52,13 +59,16 @@ ChooseLevelScene::ChooseLevelScene(QWidget *parent) : QMainWindow(parent)
         label->setAttribute(Qt::WA_TransparentForMouseEvents);
 
         connect(menuBtn, &MyPushButton::clicked, this, [=](){
+            tapButtonSound->play();
             // 进入游戏场景
             this->hide();
             play = new PlayScene(i+1);
+            play->setGeometry(this->geometry());
             play->show();
             connect(play, &PlayScene::chooseSceneBack, this, [=](){
                 QTimer::singleShot(200, this, [=](){
                     play->close();
+                    this->setGeometry(play->geometry());
                     delete play;
                     play = nullptr;
                     this->show();

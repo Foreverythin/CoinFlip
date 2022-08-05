@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_MULTIMEDIA_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=10.12 -Wall -W -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=10.12 -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I. -I../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers -I../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers -I../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I../../../Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/macx-clang -F/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib
+INCPATH       = -I. -I../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtMultimedia.framework/Headers -I../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers -I../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers -I../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtNetwork.framework/Headers -I../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I../../../Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/macx-clang -F/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib
 QMAKE         = /Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = CoinFlip1.0.0
 DISTDIR = /Users/pangyu/Documents/qt_projects/CoinFlip/.tmp/CoinFlip1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -stdlib=libc++ -headerpad_max_install_names $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=10.12 -Wl,-rpath,@executable_path/../Frameworks -Wl,-rpath,/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib
-LIBS          = $(SUBLIBS) -F/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL   
+LIBS          = $(SUBLIBS) -F/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib -framework QtMultimedia -framework QtWidgets -framework QtGui -framework QtNetwork -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL   
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 SED           = sed
@@ -53,22 +53,30 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = chooselevelscene.cpp \
+		dataconfig.cpp \
 		main.cpp \
 		mainscene.cpp \
+		mycoin.cpp \
 		mypushbutton.cpp \
 		playscene.cpp qrc_res.cpp \
 		moc_chooselevelscene.cpp \
+		moc_dataconfig.cpp \
 		moc_mainscene.cpp \
+		moc_mycoin.cpp \
 		moc_mypushbutton.cpp \
 		moc_playscene.cpp
 OBJECTS       = chooselevelscene.o \
+		dataconfig.o \
 		main.o \
 		mainscene.o \
+		mycoin.o \
 		mypushbutton.o \
 		playscene.o \
 		qrc_res.o \
 		moc_chooselevelscene.o \
+		moc_dataconfig.o \
 		moc_mainscene.o \
+		moc_mycoin.o \
 		moc_mypushbutton.o \
 		moc_playscene.o
 DIST          = ../../../Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/features/spec_pre.prf \
@@ -265,11 +273,15 @@ DIST          = ../../../Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/features/s
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/features/yacc.prf \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/features/lex.prf \
 		CoinFlip.pro chooselevelscene.h \
+		dataconfig.h \
 		mainscene.h \
+		mycoin.h \
 		mypushbutton.h \
 		playscene.h chooselevelscene.cpp \
+		dataconfig.cpp \
 		main.cpp \
 		mainscene.cpp \
+		mycoin.cpp \
 		mypushbutton.cpp \
 		playscene.cpp
 QMAKE_TARGET  = CoinFlip
@@ -489,8 +501,10 @@ Makefile: CoinFlip.pro ../../../Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/mac
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/features/lex.prf \
 		CoinFlip.pro \
 		res.qrc \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtMultimedia.framework/QtMultimedia.prl \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/QtGui.prl \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtNetwork.framework/QtNetwork.prl \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/QtCore.prl
 	$(QMAKE) -o Makefile CoinFlip.pro -spec macx-clang CONFIG+=debug CONFIG+=qml_debug
 ../../../Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/features/spec_pre.prf:
@@ -688,8 +702,10 @@ Makefile: CoinFlip.pro ../../../Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/mac
 ../../../Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/features/lex.prf:
 CoinFlip.pro:
 res.qrc:
+../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtMultimedia.framework/QtMultimedia.prl:
 ../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/QtGui.prl:
+../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtNetwork.framework/QtNetwork.prl:
 ../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/QtCore.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile CoinFlip.pro -spec macx-clang CONFIG+=debug CONFIG+=qml_debug
@@ -722,8 +738,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents res.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents chooselevelscene.h mainscene.h mypushbutton.h playscene.h $(DISTDIR)/
-	$(COPY_FILE) --parents chooselevelscene.cpp main.cpp mainscene.cpp mypushbutton.cpp playscene.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents chooselevelscene.h dataconfig.h mainscene.h mycoin.h mypushbutton.h playscene.h $(DISTDIR)/
+	$(COPY_FILE) --parents chooselevelscene.cpp dataconfig.cpp main.cpp mainscene.cpp mycoin.cpp mypushbutton.cpp playscene.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents mainscene.ui $(DISTDIR)/
 
 
@@ -788,25 +804,59 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=10.12 -Wall -W -dM -E -o moc_predefs.h ../../../Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_chooselevelscene.cpp moc_mainscene.cpp moc_mypushbutton.cpp moc_playscene.cpp
+compiler_moc_header_make_all: moc_chooselevelscene.cpp moc_dataconfig.cpp moc_mainscene.cpp moc_mycoin.cpp moc_mypushbutton.cpp moc_playscene.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_chooselevelscene.cpp moc_mainscene.cpp moc_mypushbutton.cpp moc_playscene.cpp
+	-$(DEL_FILE) moc_chooselevelscene.cpp moc_dataconfig.cpp moc_mainscene.cpp moc_mycoin.cpp moc_mypushbutton.cpp moc_playscene.cpp
 moc_chooselevelscene.cpp: chooselevelscene.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		playscene.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		mycoin.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		moc_predefs.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/bin/moc
-	/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/bin/moc $(DEFINES) --include /Users/pangyu/Documents/qt_projects/CoinFlip/moc_predefs.h -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/macx-clang -I/Users/pangyu/Documents/qt_projects/CoinFlip -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib chooselevelscene.h -o moc_chooselevelscene.cpp
+	/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/bin/moc $(DEFINES) --include /Users/pangyu/Documents/qt_projects/CoinFlip/moc_predefs.h -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/macx-clang -I/Users/pangyu/Documents/qt_projects/CoinFlip -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtMultimedia.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtNetwork.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib chooselevelscene.h -o moc_chooselevelscene.cpp
+
+moc_dataconfig.cpp: dataconfig.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QMap \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qmap.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		moc_predefs.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/bin/moc
+	/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/bin/moc $(DEFINES) --include /Users/pangyu/Documents/qt_projects/CoinFlip/moc_predefs.h -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/macx-clang -I/Users/pangyu/Documents/qt_projects/CoinFlip -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtMultimedia.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtNetwork.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib dataconfig.h -o moc_dataconfig.cpp
 
 moc_mainscene.cpp: mainscene.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		chooselevelscene.h \
 		playscene.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		mycoin.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		moc_predefs.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/bin/moc
-	/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/bin/moc $(DEFINES) --include /Users/pangyu/Documents/qt_projects/CoinFlip/moc_predefs.h -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/macx-clang -I/Users/pangyu/Documents/qt_projects/CoinFlip -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib mainscene.h -o moc_mainscene.cpp
+	/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/bin/moc $(DEFINES) --include /Users/pangyu/Documents/qt_projects/CoinFlip/moc_predefs.h -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/macx-clang -I/Users/pangyu/Documents/qt_projects/CoinFlip -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtMultimedia.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtNetwork.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib mainscene.h -o moc_mainscene.cpp
+
+moc_mycoin.cpp: mycoin.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		moc_predefs.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/bin/moc
+	/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/bin/moc $(DEFINES) --include /Users/pangyu/Documents/qt_projects/CoinFlip/moc_predefs.h -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/macx-clang -I/Users/pangyu/Documents/qt_projects/CoinFlip -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtMultimedia.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtNetwork.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib mycoin.h -o moc_mycoin.cpp
 
 moc_mypushbutton.cpp: mypushbutton.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QWidget \
@@ -815,14 +865,21 @@ moc_mypushbutton.cpp: mypushbutton.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		moc_predefs.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/bin/moc
-	/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/bin/moc $(DEFINES) --include /Users/pangyu/Documents/qt_projects/CoinFlip/moc_predefs.h -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/macx-clang -I/Users/pangyu/Documents/qt_projects/CoinFlip -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib mypushbutton.h -o moc_mypushbutton.cpp
+	/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/bin/moc $(DEFINES) --include /Users/pangyu/Documents/qt_projects/CoinFlip/moc_predefs.h -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/macx-clang -I/Users/pangyu/Documents/qt_projects/CoinFlip -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtMultimedia.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtNetwork.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib mypushbutton.h -o moc_mypushbutton.cpp
 
 moc_playscene.cpp: playscene.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		mycoin.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		moc_predefs.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/bin/moc
-	/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/bin/moc $(DEFINES) --include /Users/pangyu/Documents/qt_projects/CoinFlip/moc_predefs.h -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/macx-clang -I/Users/pangyu/Documents/qt_projects/CoinFlip -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib playscene.h -o moc_playscene.cpp
+	/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/bin/moc $(DEFINES) --include /Users/pangyu/Documents/qt_projects/CoinFlip/moc_predefs.h -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/mkspecs/macx-clang -I/Users/pangyu/Documents/qt_projects/CoinFlip -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtMultimedia.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtNetwork.framework/Headers -I/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/pangyu/Downloads/qt5.12.12/5.12.12/clang_64/lib playscene.h -o moc_playscene.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -851,26 +908,47 @@ chooselevelscene.o: chooselevelscene.cpp chooselevelscene.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		playscene.h \
-		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QMenuBar \
-		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qmenubar.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers/QPainter \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		mycoin.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QMenuBar \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qmenubar.h \
 		mypushbutton.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
-		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QLabel \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qlabel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chooselevelscene.o chooselevelscene.cpp
 
+dataconfig.o: dataconfig.cpp dataconfig.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QMap \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qmap.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qdebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dataconfig.o dataconfig.cpp
+
 main.o: main.cpp mainscene.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		chooselevelscene.h \
 		playscene.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		mycoin.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
@@ -880,19 +958,31 @@ mainscene.o: mainscene.cpp mainscene.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		chooselevelscene.h \
 		playscene.h \
-		ui_mainscene.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers/QPainter \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers/qpainter.h \
-		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		mycoin.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QTimer \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		ui_mainscene.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtMultimedia.framework/Headers/QSound \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtMultimedia.framework/Headers/qsound.h \
 		mypushbutton.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
-		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainscene.o mainscene.cpp
+
+mycoin.o: mycoin.cpp mycoin.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qdebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mycoin.o mycoin.cpp
 
 mypushbutton.o: mypushbutton.cpp mypushbutton.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QWidget \
@@ -908,8 +998,33 @@ mypushbutton.o: mypushbutton.cpp mypushbutton.h \
 playscene.o: playscene.cpp playscene.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		mycoin.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qdebug.h
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QMenuBar \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qmenubar.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers/QFont \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtGui.framework/Headers/qfont.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QPropertyAnimation \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qpropertyanimation.h \
+		mypushbutton.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		dataconfig.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QMap \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qmap.h \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/QVector \
+		../../../Downloads/qt5.12.12/5.12.12/clang_64/lib/QtCore.framework/Headers/qvector.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o playscene.o playscene.cpp
 
 qrc_res.o: qrc_res.cpp 
@@ -918,8 +1033,14 @@ qrc_res.o: qrc_res.cpp
 moc_chooselevelscene.o: moc_chooselevelscene.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_chooselevelscene.o moc_chooselevelscene.cpp
 
+moc_dataconfig.o: moc_dataconfig.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dataconfig.o moc_dataconfig.cpp
+
 moc_mainscene.o: moc_mainscene.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainscene.o moc_mainscene.cpp
+
+moc_mycoin.o: moc_mycoin.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mycoin.o moc_mycoin.cpp
 
 moc_mypushbutton.o: moc_mypushbutton.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mypushbutton.o moc_mypushbutton.cpp
